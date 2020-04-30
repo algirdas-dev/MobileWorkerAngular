@@ -1,0 +1,60 @@
+<h1 class="heading">{{title}} <i class="material-icons icon-calendar icon md-18" (click)="selectToday()">calendar_today</i></h1>
+<div class="calendar">
+    <div class="day" *ngFor="let group of eventGroups" (click)="activateDate(group)"  
+    [ngClass]="{active:group.date === eventGroup?.date
+        , 'today': isDateToday(group.date)
+        , 'is-weekend-day': group.date.getDay() === 6 || group.date.getDay() === 0 }">
+        <div class="week-day">{{getDayName(group.date)}}</div>
+        <div class="month-day">{{group.date.getDate()}}</div>
+        <div class="day-time">{{group.firstTaskStart ? getTime(group.firstTaskStart): '-'}}</div>
+        <div class="status"><i class="icon-status" [ngClass]="!(group.taskCount > 0) ? '' : group.isRejected ? 'icon-rejected' : group.isAproved ? 'icon-aproved': 'icon-default'"></i></div>
+    </div>
+</div>
+<div class="border-bottom"></div>
+
+<div class="group-detailed-info-block">
+    <div class="info-block-heading">
+        <div class="day-info">{{fullDateString}}</div>
+        <a class="heading-ref" routerLink="/timesheet">Go to timesheet</a>
+    </div>
+    <div class="detailed-day-grid-list">
+        <div class="grid-name">
+            <i class="icon material-icons md-18">access_time</i>
+            <div class="title">Hours</div>
+            <div class="time">({{getTime(eventGroup?.firstTaskStart) + ' - ' + getTime(eventGroup?.lastTaskEnd)}})</div>
+        </div>
+        <div class="detailed-grid two-columns">
+            <div class="grid-heading column-1">Type</div>
+            <div class="grid-heading column-2">Duration</div>
+            <div class="column-1">Arbeitstid</div>
+            <div class="column-2">7:30</div>
+            <div class="column-1">Overtid</div>
+            <div class="column-2">1:00</div>
+        </div>
+        <div class="grid-name">
+            <i class="icon material-icons md-18">attach_money</i>
+            <div class="title">Expenses</div>
+        </div>
+        <div class="detailed-grid three-columns">
+            <div class="grid-heading column-1">Type</div>
+            <div class="grid-heading column-2">Quantity</div>
+            <div class="grid-heading column-3">Total</div>
+            <div class="column-1">Liftleie dagpris</div>
+            <div class="column-2">{{eventGroup.quantity}}</div>
+            <div class="column-3">{{eventGroup.price}}</div>
+        </div>
+        <div class="grid-name">
+            <i class="icon material-icons md-18">av_timer</i>
+            <div class="title">Additional hour</div>
+        </div>
+        <div class="detailed-grid two-columns">
+            <div class="grid-heading column-1">type</div>
+            <div class="grid-heading column-2">Ammoun</div>
+            <div class="column-1">Liftleie dagpris</div>
+            <div class="column-2">2</div>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <button class="button" routerLink="/add-task">Add task</button>
+</div>
