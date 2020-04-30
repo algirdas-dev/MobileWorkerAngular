@@ -6,7 +6,7 @@ import { AddTaskComponent } from './add-task/add-task.component';
 
 
 const routes: Routes = [
-  { path:'timesheet-widget',component:TimesheetWidgetComponent },
+  { path:'',component:TimesheetWidgetComponent },
   { path:'timesheet',component:TimesheetComponent },
   { path:'add-task',component:AddTaskComponent }
 ];
